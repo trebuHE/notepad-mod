@@ -1,3 +1,0 @@
-blastfurnace_d374
-    Assets/ExampleMod/BlastFurnace.prefab
-

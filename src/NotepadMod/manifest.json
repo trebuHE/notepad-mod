@@ -1,0 +1,12 @@
+﻿{
+	"id": "NotepadMod",
+	"version": "0.0.1",
+  "display_name": "Notepad Mod",
+  "description_short": "Simple floating window in-game notepad.",
+  "description_long": "Simple floating window in-game notepad.",
+  "authors": "Hubert Mucha",
+  "can_add_to_saved_games": true,
+  "can_remove_from_saved_games": true,
+	"primary_dlls": [ "NotepadMod.dll" ],
+	"non_locking_dll_load": true
+}
