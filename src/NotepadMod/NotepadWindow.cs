@@ -11,7 +11,9 @@ public class NotepadWindow : Window
 {
   public NotepadWindow() : base(new LocStrFormatted("Notepad"), false)
   {
-    
+    WindowSize(350.px(), 500.px());
+    MakeMovable();
+    EnablePinning();
   }
 
   [GlobalDependency(RegistrationMode.AsEverything)]
