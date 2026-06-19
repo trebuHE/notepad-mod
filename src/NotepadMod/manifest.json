@@ -5,8 +5,10 @@
   "description_short": "Simple floating window in-game notepad.",
   "description_long": "Simple floating window in-game notepad.",
   "authors": "Hubert Mucha",
-  "can_add_to_saved_games": true,
-  "can_remove_from_saved_games": true,
+  "can_add_to_saved_game": true,
+  "can_remove_from_saved_game": true,
 	"primary_dlls": [ "NotepadMod.dll" ],
-	"non_locking_dll_load": true
+	"non_locking_dll_load": true,
+  "min_game_version" : "0.8.0",
+  "max_verified_game_version": "0.8.5"
 }
