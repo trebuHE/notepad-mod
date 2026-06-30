@@ -21,6 +21,18 @@ public class NotepadDataManager
     }
   }
 
+  public void Save(string data)
+  {
+    try
+    {
+      File.WriteAllText(SaveFilePath, data);
+    } 
+    catch(Exception e)
+    {
+      Log.Warning($"[NotepadMod] Failed to save data: {e.Message}");  
+    }
+  }
+  
   public NotepadData Load()
   {
     if(!File.Exists(SaveFilePath)) return new NotepadData("");
