@@ -1,6 +1,6 @@
 namespace NotepadMod;
 
-public class NotepadData
+public class NotepadData(string note)
 {
-  public string TextNote {get; set; } = "";
+  public string TextNote { get; set; } = note;
 }
