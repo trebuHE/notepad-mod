@@ -2,6 +2,8 @@ using System;
 using Mafi;
 using Mafi.Localization;
 using Mafi.Unity.InputControl;
+using Mafi.Unity.Ui.Library.Inspectors;
+using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
 
 namespace NotepadMod;
@@ -9,11 +11,45 @@ namespace NotepadMod;
 [GlobalDependency(RegistrationMode.AsEverything)]
 public class NotepadWindow : Window
 {
-  public NotepadWindow() : base(new LocStrFormatted("Notepad"), false)
+  private TextField noteField;
+  private readonly NotepadDataManager _dataManager;
+  public NotepadWindow(NotepadDataManager dataManager) : base(new LocStrFormatted("Notepad"), false)
   {
+    _dataManager = dataManager;
     WindowSize(350.px(), 500.px());
     MakeMovable();
     EnablePinning();
+
+    BuildUI();
+    LoadNotes();
+  }
+
+  private void BuildUI()
+  {
+    noteField = new TextField()
+      .Multiline(doNotScroll: false, labelOnTop: false)
+      .OnValueChanged(_dataManager.Save, isDelayed: true)
+      .FocusOnShow()
+      .SetTextAreaHeight(380.px())
+      .Fill();
+
+    var col = new ScrollColumn();
+    col.Width(330.px());
+
+    col.Add(noteField);
+    var panel = new PanelWithHeader("Notes".AsLoc());
+    panel.BodyAdd(col);
+    Body.Add(panel);
+  }
+
+  private void LoadNotes()
+  {
+    string notes  = _dataManager.Load().TextNote;
+
+    if (!string.IsNullOrEmpty(notes))
+    {
+      noteField.Text(notes.AsLoc());
+    }
   }
 
   [GlobalDependency(RegistrationMode.AsEverything)]
@@ -25,7 +61,10 @@ public class NotepadWindow : Window
       controllerContext.InputManager.RegisterGlobalShortcut(_ => ShortcutMap.Instance.OpenNotepad, this);
     }
 
-    public void Open() => this.ActivateSelf();
+    public void Open()
+    {
+      ActivateSelf();
+    } 
 
     public class ShortcutMap
     {
