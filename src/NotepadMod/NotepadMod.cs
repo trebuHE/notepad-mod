@@ -12,7 +12,7 @@ public sealed class NotepadMod : IMod
   public NotepadMod(ModManifest manifest)
   {
     Manifest = manifest;
-    Log.Info("[Notepad] Contructed!");
+    Log.Info("[NotepadMod] Contructed!");
   }
   public string Name => "Notepad Mod";
   public int Version => 1;
