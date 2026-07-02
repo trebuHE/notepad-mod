@@ -14,7 +14,7 @@ public class NotepadWindow : Window
 {
   private TextField noteField;
   private readonly NotepadDataManager _dataManager;
-  private string[] tabsText = new string[5];
+  private List<NotepadData> notes= [];
   private int activeTabIndex = 0;
   private const int numberOfTabs = 5;
 
@@ -26,8 +26,9 @@ public class NotepadWindow : Window
     MakeMovable();
     EnablePinning();
 
-    BuildUI();
     LoadNotes();
+    BuildUI();
+    SwitchTab(activeTabIndex);
   }
 
   private void BuildUI()
@@ -44,7 +45,7 @@ public class NotepadWindow : Window
 
     noteField = new TextField()
       .Multiline(doNotScroll: false, labelOnTop: false)
-      .OnValueChanged(_dataManager.Save, isDelayed: true)
+      .OnValueChanged(newText => {notes[activeTabIndex].TextNote = newText; SaveNotes();}, isDelayed: true)
       .FocusOnShow()
       .SetTextAreaHeight(320.px())
       .Fill();
@@ -60,20 +61,31 @@ public class NotepadWindow : Window
     Body.Add(notesPanel);
   }
 
+  private void SaveNotes()
+  {
+    _dataManager.Save(notes, activeTabIndex);
+  }
+
   private void SwitchTab(int index)
   {
+    activeTabIndex = index;
+
     for (int i = 0; i < tabButtons.Count; i++)
     {
       tabButtons[i].Color(i == index ? Theme.PositiveColor : null);
     }
+
+    noteField.Text(notes[activeTabIndex].TextNote);
   }
   private void LoadNotes()
   {
-    string notes  = _dataManager.Load().TextNote;
+    (notes, activeTabIndex) = _dataManager.Load();
 
-    if (!string.IsNullOrEmpty(notes))
+    notes ??= [];
+
+    while (notes.Count < numberOfTabs)
     {
-      noteField.Text(notes.AsLoc());
+      notes.Add(new NotepadData(""));
     }
   }
 

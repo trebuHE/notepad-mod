@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Mafi;
 
 namespace NotepadMod;
@@ -7,22 +9,19 @@ namespace NotepadMod;
 [GlobalDependency(RegistrationMode.AsEverything)]
 public class NotepadDataManager
 {
+  private const string delimiter = "\n---NOTE_TAB_SPLIT---\n";
   private string SaveFilePath => Path.Combine(Environment.CurrentDirectory, "notes.txt");
 
-  public void Save(NotepadData data)
+  public void Save(List<NotepadData> notes, int activeTab)
   {
-    try
-    {
-      File.WriteAllText(SaveFilePath, data.TextNote);
-    } 
-    catch(Exception e)
-    {
-      Log.Warning($"[NotepadMod] Failed to save data: {e.Message}");  
-    }
-  }
+    string data = "";
+    data += activeTab + delimiter;
 
-  public void Save(string data)
-  {
+    foreach (NotepadData note in notes)
+    {
+      data += note.TextNote + delimiter;
+    }
+
     try
     {
       File.WriteAllText(SaveFilePath, data);
@@ -32,20 +31,34 @@ public class NotepadDataManager
       Log.Warning($"[NotepadMod] Failed to save data: {e.Message}");  
     }
   }
-  
-  public NotepadData Load()
+
+  public (List<NotepadData>, int activeIndex) Load()
   {
-    if(!File.Exists(SaveFilePath)) return new NotepadData("");
+    int active = 0;
+    if(!File.Exists(SaveFilePath)) return ([], active);
 
     try
     {
-      NotepadData data = new(File.ReadAllText(SaveFilePath));
-      return data;
+      List<NotepadData> notes = [];
+      string data = File.ReadAllText(SaveFilePath);
+      string[] split = data.Split([delimiter], StringSplitOptions.None);
+
+      active = int.TryParse(split[0], out int idx) ? idx : 0;
+      split[0] = "";
+      foreach (string s in split)
+      {
+        if(s != "")
+        {
+          notes.Add(new NotepadData(s));
+        }
+      }
+
+      return (notes, active);
     }
     catch(Exception e)
     {
       Log.Warning($"[NotepadMod] Failed to load data: {e.Message}");
-      return new NotepadData("");
+      return ([], active);
     }
   }
 }
