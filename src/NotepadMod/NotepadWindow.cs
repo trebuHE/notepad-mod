@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using Mafi;
 using Mafi.Localization;
 using Mafi.Unity.InputControl;
-using Mafi.Unity.Ui.Library.Inspectors;
 using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
+using Mafi.Unity.UiToolkit;
 
 namespace NotepadMod;
 
@@ -13,10 +14,15 @@ public class NotepadWindow : Window
 {
   private TextField noteField;
   private readonly NotepadDataManager _dataManager;
+  private string[] tabsText = new string[5];
+  private int activeTabIndex = 0;
+  private const int numberOfTabs = 5;
+
+  private List<ButtonText> tabButtons = [];
   public NotepadWindow(NotepadDataManager dataManager) : base(new LocStrFormatted("Notepad"), false)
   {
     _dataManager = dataManager;
-    WindowSize(350.px(), 500.px());
+    WindowSize(350.px(), 540.px());
     MakeMovable();
     EnablePinning();
 
@@ -26,22 +32,41 @@ public class NotepadWindow : Window
 
   private void BuildUI()
   {
+    var tabsRow = new Row(2.pt()).AlignItemsCenterMiddle().PaddingBottom(2.pt());
+    var tabsLabel = new Label("Tabs".AsLoc());
+    for (int i = 0; i < numberOfTabs; i++)
+    {
+      int index = i;
+      var btn = new ButtonText($"{i+1}".AsLoc(), () => SwitchTab(index)).Compact();
+      tabButtons.Add(btn);
+      tabsRow.Add(btn);
+    }
+
     noteField = new TextField()
       .Multiline(doNotScroll: false, labelOnTop: false)
       .OnValueChanged(_dataManager.Save, isDelayed: true)
       .FocusOnShow()
-      .SetTextAreaHeight(380.px())
+      .SetTextAreaHeight(320.px())
       .Fill();
 
     var col = new ScrollColumn();
-    col.Width(330.px());
-
+    col.WidthAuto();
     col.Add(noteField);
-    var panel = new PanelWithHeader("Notes".AsLoc());
-    panel.BodyAdd(col);
-    Body.Add(panel);
+    var notesPanel = new PanelWithHeader("Notes".AsLoc()).Margin(1.pt());
+    var tabsPanel = new PanelWithHeader("Tabs".AsLoc()).Margin(1.pt());
+    tabsPanel.Add(tabsRow);
+    notesPanel.BodyAdd(col);
+    Body.Add(tabsPanel);
+    Body.Add(notesPanel);
   }
 
+  private void SwitchTab(int index)
+  {
+    for (int i = 0; i < tabButtons.Count; i++)
+    {
+      tabButtons[i].Color(i == index ? Theme.PositiveColor : null);
+    }
+  }
   private void LoadNotes()
   {
     string notes  = _dataManager.Load().TextNote;
