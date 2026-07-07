@@ -10,7 +10,8 @@ namespace NotepadMod;
 public class NotepadDataManager
 {
   private const string delimiter = "\n---NOTE_TAB_SPLIT---\n";
-  private string SaveFilePath => Path.Combine(Environment.CurrentDirectory, "notes.txt");
+  private string SaveDir => Path.Combine(Environment.CurrentDirectory, "NotepadMod");
+  private string SaveFilePath => Path.Combine(SaveDir, "notes.txt");
 
   public void Save(List<NotepadData> notes, int activeTab)
   {
@@ -24,11 +25,14 @@ public class NotepadDataManager
 
     try
     {
+      if (!Directory.Exists(SaveDir)) 
+        Directory.CreateDirectory(SaveDir);
+
       File.WriteAllText(SaveFilePath, data);
     } 
     catch(Exception e)
     {
-      Log.Warning($"[NotepadMod] Failed to save data: {e.Message}");  
+      Log.Error($"[NotepadMod] Failed to save data: {e.Message}");  
     }
   }
 
@@ -52,12 +56,11 @@ public class NotepadDataManager
           notes.Add(new NotepadData(s));
         }
       }
-
       return (notes, active);
     }
     catch(Exception e)
     {
-      Log.Warning($"[NotepadMod] Failed to load data: {e.Message}");
+      Log.Error($"[NotepadMod] Failed to load data: {e.Message}");
       return ([], active);
     }
   }
