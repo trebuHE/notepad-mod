@@ -7,7 +7,7 @@ This is a simple notepad mod that lets you open a floating notepad with tabs in 
 </p>
 
 # Instalation
-- Download the latest version of the mod.
+- Download the [latest version](https://github.com/trebuHE/notepad-mod/releases/latest) of the mod.
 - Extract the mod files into game's Mods folder `%AppData%\Captain of Industry\Mods`.
 - Enable the mod in game, can be added and removed from existing saves.
 
