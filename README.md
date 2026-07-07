@@ -6,6 +6,13 @@ This is a simple notepad mod that lets you open a floating notepad with tabs in 
   <img src="./notepad.png" title="Notepad in game">
 </p>
 
+# Instalation
+- Download the latest version of the mod.
+- Extract the mod files into game's Mods folder `%AppData%\Captain of Industry\Mods`.
+- Enable the mod in game, can be added and removed from existing saves.
 
 ## Usage
-To open/close the notepad window use ``Lctrl + N`` shortcut. Window can be moved and pinned. Notes are saved on focus loss and ``Enter`` press as a ``.txt`` file in mod's directory. Tabs are changed using buttons at the top of the window.
+To open/close the notepad window use ``Lctrl + N`` shortcut. Window can be moved and pinned. Notes are saved on focus loss and ``Enter`` press as a ``.txt`` file in game's directory. Tabs are changed using buttons at the top of the window.
+
+## Bugs, problems and contributions
+In case of problems or bugs feel free to report them in the GitHub Issues or fix them yourself and create a Pull Request. 
