@@ -10,5 +10,6 @@
 	"primary_dlls": [ "NotepadMod.dll" ],
 	"non_locking_dll_load": true,
   "min_game_version" : "0.8.4",
-  "max_verified_game_version": "0.8.5"
+  "max_verified_game_version": "0.8.5",
+  "optional_mod_dependencies": ["keybind-framework"]
 }
