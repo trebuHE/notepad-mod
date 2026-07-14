@@ -34,14 +34,14 @@ namespace NotepadMod
         }
         if (apiType == null) return;
 
-        s_getCombo = apiType.GetMethod("GetCombo", new[] { typeof(string), typeof(string) });
-        var reg = apiType.GetMethod("RegisterRaw", new[] { typeof(string), typeof(string), typeof(string[]) });
+        s_getCombo = apiType.GetMethod("GetCombo", [typeof(string), typeof(string)]);
+        var reg = apiType.GetMethod("RegisterRaw", [typeof(string), typeof(string), typeof(string[])]);
         if (reg == null) return;
 
         var rows = new List< string>();
         foreach (var d in Descriptors)
-          rows.Add(string.Join(SEP, new[] { d[0], d[1], d[2], d[3], d[4], d[5], "", d[6] }));
-        reg.Invoke(null, new object[] { MOD_ID, DISPLAY, rows.ToArray() });
+          rows.Add(string.Join(SEP, [d[0], d[1], d[2], d[3], d[4], d[5], "", d[6]]));
+        reg.Invoke(null, [MOD_ID, DISPLAY, rows.ToArray()]);
       }
       catch { }
     }
@@ -52,7 +52,7 @@ namespace NotepadMod
       {
         if (s_getCombo != null)
         {
-          var c = s_getCombo.Invoke(null, new object[] { MOD_ID, id }) as string;
+          var c = s_getCombo.Invoke(null, [MOD_ID, id]) as string;
           if (!string.IsNullOrEmpty(c)) return c;
         }
       }
