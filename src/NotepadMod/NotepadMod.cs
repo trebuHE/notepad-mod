@@ -39,7 +39,8 @@ public sealed class NotepadMod : IMod
 
   public void Initialize(DependencyResolver resolver, bool gameWasLoaded)
   {
-    
+    //Register keybinds from Keybinds Framework
+    NotepadKeybinds.Register();
   }
 
   public void MigrateJsonConfig(VersionSlim savedVersion, Dict<string, object> savedValues) 
