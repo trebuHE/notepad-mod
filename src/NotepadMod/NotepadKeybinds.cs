@@ -38,7 +38,7 @@ namespace NotepadMod
         var reg = apiType.GetMethod("RegisterRaw", new[] { typeof(string), typeof(string), typeof(string[]) });
         if (reg == null) return;
 
-        var rows = new List& lt; string> ();
+        var rows = new List< string>();
         foreach (var d in Descriptors)
           rows.Add(string.Join(SEP, new[] { d[0], d[1], d[2], d[3], d[4], d[5], "", d[6] }));
         reg.Invoke(null, new object[] { MOD_ID, DISPLAY, rows.ToArray() });
@@ -69,7 +69,7 @@ namespace NotepadMod
       };
     }
 
-    private static bool ModifiersHeldExactly(List&lt; KeyCode> mods)
+    private static bool ModifiersHeldExactly(List< KeyCode> mods)
         {
             bool wantCtrl = false, wantShift = false, wantAlt = false;
             foreach (var m in mods)
@@ -93,12 +93,12 @@ public static bool IsPressed(string id, string defaultCombo)
 
   string combo = ComboFor(id, defaultCombo);
   KeyCode mainKey = KeyCode.None;
-  var mods = new List& lt; KeyCode > ();
+  var mods = new List <KeyCode > ();
   foreach (var token in combo.Split('+'))
   {
     var t = token.Trim();
     if (t.Length == 0 || t == "None") continue;
-    if (!Enum.TryParse & lt; KeyCode > (t, out var key)) continue;
+    if (!Enum.TryParse <KeyCode > (t, out var key)) continue;
     if (IsModifierKey(key)) mods.Add(key); else mainKey = key;
   }
   if (mainKey == KeyCode.None) return false;
