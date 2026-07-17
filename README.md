@@ -11,6 +11,9 @@ This is a simple notepad mod that lets you open a floating notepad with tabs in 
 - Extract the mod files into game's Mods folder `%AppData%\Captain of Industry\Mods`.
 - Enable the mod in game, can be added and removed from existing saves.
 
+## Dependencies
+- (optional) [Keybind Framework](https://coigame.com/Mod/1104/Keybind-Framework) allows to customize the open/close keybind.
+
 ## Usage
 To open/close the notepad window use ``Lctrl + N`` shortcut. Window can be moved and pinned. Notes are saved on focus loss and ``Enter`` press as a ``.txt`` file in game's directory. Tabs are changed using buttons at the top of the window.
 
