@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Mafi;
 using Mafi.Localization;
@@ -14,7 +13,7 @@ public class NotepadWindow : Window
 {
   private TextField noteField;
   private readonly NotepadDataManager _dataManager;
-  private List<NotepadData> notes= [];
+  private List<NotepadData> notes = [];
   private int activeTabIndex = 0;
   private const int numberOfTabs = 5;
 
@@ -38,14 +37,14 @@ public class NotepadWindow : Window
     for (int i = 0; i < numberOfTabs; i++)
     {
       int index = i;
-      var btn = new ButtonText($"{i+1}".AsLoc(), () => SwitchTab(index)).Compact();
+      var btn = new ButtonText($"{i + 1}".AsLoc(), () => SwitchTab(index)).Compact();
       tabButtons.Add(btn);
       tabsRow.Add(btn);
     }
 
     noteField = new TextField()
       .Multiline(doNotScroll: false, labelOnTop: false)
-      .OnValueChanged(newText => {notes[activeTabIndex].TextNote = newText; SaveNotes();}, isDelayed: true)
+      .OnValueChanged(newText => { notes[activeTabIndex].TextNote = newText; SaveNotes(); }, isDelayed: true)
       .FocusOnShow()
       .SetTextAreaHeight(320.px())
       .Fill();
@@ -92,23 +91,24 @@ public class NotepadWindow : Window
   [GlobalDependency(RegistrationMode.AsEverything)]
   public class Controller : WindowController<NotepadWindow>
   {
+    public static Controller Instance { get; private set; }
     public Controller(ControllerContext controllerContext) : base(controllerContext)
     {
       controllerContext.UiRoot.AddDependency(this);
-      controllerContext.InputManager.RegisterGlobalShortcut(_ => ShortcutMap.Instance.OpenNotepad, this);
+      Instance = this;
     }
 
-    public void Open()
+    public void ToggleWindow()
     {
-      ActivateSelf();
-    } 
-
-    public class ShortcutMap
-    {
-      public static ShortcutMap Instance {get; } = new();
-
-      [Kb(KbCategory.Tools, "open_notepad", "Open notepad")]
-      public KeyBindings OpenNotepad {get; set; } = KeyBindings.FromPrimaryKeys(KbCategory.Tools, ShortcutMode.Game, UnityEngine.KeyCode.LeftControl, UnityEngine.KeyCode.N);
+      if (IsActive)
+      {
+        DeactivateSelf();
+      }
+      else
+      {
+        ActivateSelf();
+      }
     }
   }
 }
+
