@@ -41,6 +41,7 @@ public sealed class NotepadMod : IMod
   {
     //Register keybinds from Keybinds Framework
     NotepadKeybinds.Register();
+    NotepadRuntime.Start();
   }
 
   public void MigrateJsonConfig(VersionSlim savedVersion, Dict<string, object> savedValues) 
