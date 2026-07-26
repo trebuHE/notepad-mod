@@ -48,14 +48,16 @@ public class NotepadDataManager
       string[] split = data.Split([delimiter], StringSplitOptions.None);
 
       active = int.TryParse(split[0], out int idx) ? idx : 0;
-      split[0] = "";
-      foreach (string s in split)
+      
+      // Start at 1 to skip the active tab index
+      for (int i = 1; i < split.Length; i++)
       {
-        if(s != "")
-        {
-          notes.Add(new NotepadData(s));
-        }
+        if (i == split.Length - 1 && split[i] == "") 
+            break;
+
+        notes.Add(new NotepadData(split[i]));
       }
+      
       return (notes, active);
     }
     catch(Exception e)

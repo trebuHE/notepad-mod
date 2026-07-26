@@ -1,3 +1,6 @@
+v0.2.1 | 2026-07-26
+* Fix a bug that caused empty tabs to be filled with notes from the tabs behind them.
+
 v0.2.0 | 2026-07-17
 * Add optional Keybind Framework integration.
 
