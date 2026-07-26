@@ -1,0 +1,5 @@
+v0.2.0 | 2026-07-17
+* Add optional Keybind Framework integration.
+
+v0.1.0 | 2026-07-07
+* Initial version
