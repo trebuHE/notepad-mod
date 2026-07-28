@@ -14,7 +14,12 @@ internal static class NotepadKeybinds
   // id, label, type, default combo, gesture hint, group, tooltip
   private static readonly string[][] Descriptors =
   [
-    ["NotepadMod_ToggleWindow", "Toggle notepad window", "Discrete", "LeftControl + N", "", "Notepad", "Opens and closes notepad window"]
+    ["NotepadMod_ToggleWindow", "Toggle notepad window", "Discrete", "LeftControl + N", "", "Notepad", "Opens and closes notepad window"],
+    ["NotepadMod_Tab1", "Switch to tab 1", "Discrete", "LeftControl + Alpha1", "", "Tabs", ""],
+    ["NotepadMod_Tab2", "Switch to tab 2", "Discrete", "LeftControl + Alpha2", "", "Tabs", ""],
+    ["NotepadMod_Tab3", "Switch to tab 3", "Discrete", "LeftControl + Alpha3", "", "Tabs", ""],
+    ["NotepadMod_Tab4", "Switch to tab 4", "Discrete", "LeftControl + Alpha4", "", "Tabs", ""],
+    ["NotepadMod_Tab5", "Switch to tab 5", "Discrete", "LeftControl + Alpha5", "", "Tabs", ""]
   ];
 
   private static MethodInfo s_getCombo;
