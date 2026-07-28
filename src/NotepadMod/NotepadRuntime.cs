@@ -26,5 +26,14 @@ public class NotepadKeybindPoller : MonoBehaviour
     {
       NotepadWindow.Controller.Instance?.ToggleWindow();
     }
+
+    if (NotepadWindow.Controller.Instance?.IsActive == true)
+    {
+      if (NotepadKeybinds.IsPressed("NotepadMod_Tab1", "LeftControl + Alpha1")) NotepadWindow.Instance.SwitchTab(0);
+      if (NotepadKeybinds.IsPressed("NotepadMod_Tab2", "LeftControl + Alpha2")) NotepadWindow.Instance.SwitchTab(1);
+      if (NotepadKeybinds.IsPressed("NotepadMod_Tab3", "LeftControl + Alpha3")) NotepadWindow.Instance.SwitchTab(2);
+      if (NotepadKeybinds.IsPressed("NotepadMod_Tab4", "LeftControl + Alpha4")) NotepadWindow.Instance.SwitchTab(3);
+      if (NotepadKeybinds.IsPressed("NotepadMod_Tab5", "LeftControl + Alpha5")) NotepadWindow.Instance.SwitchTab(4);
+    }
   }
 }

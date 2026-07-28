@@ -5,12 +5,14 @@ using Mafi.Unity.InputControl;
 using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
 using Mafi.Unity.UiToolkit;
+using System.ComponentModel;
 
 namespace NotepadMod;
 
 [GlobalDependency(RegistrationMode.AsEverything)]
 public class NotepadWindow : Window
 {
+  public static NotepadWindow Instance {get; private set;}
   private TextField noteField;
   private readonly NotepadDataManager _dataManager;
   private List<NotepadData> notes = [];
@@ -21,6 +23,7 @@ public class NotepadWindow : Window
   public NotepadWindow(NotepadDataManager dataManager) : base(new LocStrFormatted("Notepad"), false)
   {
     _dataManager = dataManager;
+    Instance = this;
     WindowSize(350.px(), 540.px());
     MakeMovable();
     EnablePinning();
@@ -65,7 +68,7 @@ public class NotepadWindow : Window
     _dataManager.Save(notes, activeTabIndex);
   }
 
-  private void SwitchTab(int index)
+  public void SwitchTab(int index)
   {
     activeTabIndex = index;
 
