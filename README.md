@@ -15,7 +15,7 @@ This is a simple notepad mod that lets you open a floating notepad with tabs in 
 - (optional) [Keybind Framework](https://coigame.com/Mod/1104/Keybind-Framework) allows for customizing the keybinds.
 
 ## Usage
-To open/close the notepad window use ``Lctrl + N`` shortcut. Window can be moved and pinned. Notes are saved on focus loss and ``Enter`` press as a ``.txt`` file in game's directory. Tabs are changed using buttons at the top of the window or ``Lctrl + 1-5``.
+To open/close the notepad window use ``Lctrl + N`` shortcut. Window can be moved and pinned. Notes are saved automatically as a ``.txt`` file in game's directory. Tabs are changed using buttons at the top of the window or ``Lctrl + 1-5``.
 
 ## Bugs, problems and contributions
 In case of problems or bugs feel free to report them in the GitHub Issues or fix them yourself and create a Pull Request. 
