@@ -1,6 +1,6 @@
 ﻿{
 	"id": "NotepadMod",
-	"version": "0.2.3",
+	"version": "0.2.4",
   "display_name": "Notepad Mod",
   "description_short": "Simple floating in-game notepad.",
   "description_long": "<b>Notepad Mod</b>\nSimple floating in-game notepad. To open/close the notepad window use <b>Lctrl + N</b> shortcut. Window can be moved and pinned. Notes are saved on focus loss and <b>Enter</b> press.",

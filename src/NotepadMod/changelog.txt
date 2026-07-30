@@ -1,3 +1,6 @@
+v0.2.4 | 2026-07-30
+* Fix active tab index not being clamped, preventing out-of-bounds crash.
+
 v0.2.3 | 2026-07-30
 * Fix a bug causing notes to not be saved when switching tabs using keyboard shortcuts.
 

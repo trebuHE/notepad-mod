@@ -89,6 +89,9 @@ public class NotepadWindow : Window
     {
       notes.Add(new NotepadData(""));
     }
+
+    if (activeTabIndex < 0 || activeTabIndex >= notes.Count)
+      activeTabIndex = 0;
   }
 
   [GlobalDependency(RegistrationMode.AsEverything)]
