@@ -47,7 +47,7 @@ public class NotepadWindow : Window
 
     noteField = new TextField()
       .Multiline(doNotScroll: false, labelOnTop: false)
-      .OnValueChanged(newText => { notes[activeTabIndex].TextNote = newText; SaveNotes(); }, isDelayed: true)
+      .OnValueChanged(newText => { notes[activeTabIndex].TextNote = newText; SaveNotes(); }, isDelayed: false)
       .FocusOnShow()
       .SetTextAreaHeight(320.px())
       .Fill();
