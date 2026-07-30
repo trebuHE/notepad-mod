@@ -5,7 +5,6 @@ using Mafi.Unity.InputControl;
 using Mafi.Unity.UiToolkit.Component;
 using Mafi.Unity.UiToolkit.Library;
 using Mafi.Unity.UiToolkit;
-using System.ComponentModel;
 
 namespace NotepadMod;
 
@@ -47,7 +46,7 @@ public class NotepadWindow : Window
 
     noteField = new TextField()
       .Multiline(doNotScroll: false, labelOnTop: false)
-      .OnValueChanged(newText => { notes[activeTabIndex].TextNote = newText; SaveNotes(); }, isDelayed: false)
+      .OnValueChanged(newText => notes[activeTabIndex].TextNote = newText, isDelayed: false)
       .FocusOnShow()
       .SetTextAreaHeight(320.px())
       .Fill();
@@ -70,6 +69,7 @@ public class NotepadWindow : Window
 
   public void SwitchTab(int index)
   {
+    SaveNotes();
     activeTabIndex = index;
 
     for (int i = 0; i < tabButtons.Count; i++)
@@ -79,6 +79,7 @@ public class NotepadWindow : Window
 
     noteField.Text(notes[activeTabIndex].TextNote);
   }
+
   private void LoadNotes()
   {
     (notes, activeTabIndex) = _dataManager.Load();
