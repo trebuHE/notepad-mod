@@ -1,3 +1,6 @@
+v0.2.3 | 2026-07-30
+* Fix a bug causing notes to not be saved when switching tabs using keyboard shortcuts.
+
 v0.2.2 | 2026-07-28
 * Add hotkeys for switching tabs: Lctrl + 1-5.
 
